@@ -9,7 +9,7 @@ export default function App() {
                     <option selected disabled>Choose a city</option>
                     <option value="wellington">Wellington</option>
                     <option value="fortdefrance">Fort-de France</option>
-                    <option value="sansebastian">San Sebastián</option>
+                    <option value="sansebastian">Donostia-San Sebastián</option>
                 </select>
 </div>
         </div>
