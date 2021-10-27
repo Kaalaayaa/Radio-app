@@ -1,4 +1,9 @@
 Radio Team
 
 
-test
+# USAGE
+
+- Start the backend:
+    - `$ node backend/index.js`
+                or
+    - `$ nodemon backend/index.js`
