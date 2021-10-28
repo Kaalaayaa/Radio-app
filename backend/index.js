@@ -1,35 +1,69 @@
-import express from 'express';
+import express from "express";
 import connect from "./libs/config.js";
-import config from './libs/config.js';
-import axios from "axios"
-
+import config from "./libs/config.js";
+import axios from "axios";
 
 // Setup / Configure Express
 const app = express();
 config(app);
 connect(app);
 
-app.use('/user', userRouter);
-
-var options = {
-  method: 'GET',
-  url: 'https://50k-radio-stations.p.rapidapi.com/get/channels',
-  params: {keyword: 'a', country_id: '50', page: '1'},
+const optionsWellington = {
+  method: "GET",
+  url: "https://50k-radio-stations.p.rapidapi.com/get/channels",
+  params: { city_id: "360", country_id: "27", page: "1" },
   headers: {
-    'x-rapidapi-host': '50k-radio-stations.p.rapidapi.com',
-    'x-rapidapi-key': '1d26f359d5mshd8151fbb9814149p1e79f5jsned2a629458dd'
-  }
+    "x-rapidapi-host": "50k-radio-stations.p.rapidapi.com",
+    "x-rapidapi-key": '7355053848msha2699ff0ecee7eep1621e3jsnd39a66924d04',
+  },
 };
 
-app.get("/api", (req, res) => {
-axios.request(options).then(function (response) {
-	res.json({ station : response.data.data[0].streams_url[0].url});
-}).catch(function (error) {
-	console.error(error);
+const optionsDonosti = {
+  method: "GET",
+  url: "https://50k-radio-stations.p.rapidapi.com/get/channels",
+  params: { city_id: "3349", country_id: "33", page: "1" },
+  headers: {
+    "x-rapidapi-host": "50k-radio-stations.p.rapidapi.com",
+    "x-rapidapi-key": '7355053848msha2699ff0ecee7eep1621e3jsnd39a66924d04',
+  },
+};
+
+const optionsFdF = {
+  method: "GET",
+  url: "https://50k-radio-stations.p.rapidapi.com/get/channels",
+  params: { city_id: "3885", country_id: "61", page: "1" },
+  headers: {
+    "x-rapidapi-host": "50k-radio-stations.p.rapidapi.com",
+    "x-rapidapi-key": '7355053848msha2699ff0ecee7eep1621e3jsnd39a66924d04',
+  },
+};
+
+
+app.get("/city/:cityName", (req, res) => {
+  const cityName = req.params.cityName
+  let options
+  switch(cityName) {
+  case "wellington":
+    options = optionsWellington
+    break;
+  case "donosti":
+    options = optionsDonosti
+    break;
+  case "fortDeFrance":
+    options = optionsFdF
+    break;
+  default:
+}
+
+  axios
+    .request(options)
+    .then(function (response) {
+      res.json({ station: response.data.data[0].streams_url[0].url });
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
 });
 
-})
-
-
-const PORT = process.env.PORT || 9124
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+const PORT = process.env.PORT || 9125;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
