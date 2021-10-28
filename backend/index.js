@@ -6,8 +6,10 @@ import axios from "axios"
 
 // Setup / Configure Express
 const app = express();
-config(app)
-connect(app)
+config(app);
+connect(app);
+
+app.use('/user', userRouter);
 
 var options = {
   method: 'GET',
