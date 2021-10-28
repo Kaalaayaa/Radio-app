@@ -1,2 +1,2 @@
-GET http://localhost:3001/api
+GET http://localhost:9125/city/wellington
 Content-Type: application/json
