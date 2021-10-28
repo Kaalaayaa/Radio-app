@@ -14,17 +14,17 @@ const optionsWellington = {
   params: { city_id: "360", country_id: "27", page: "1" },
   headers: {
     "x-rapidapi-host": "50k-radio-stations.p.rapidapi.com",
-    "x-rapidapi-key": '7355053848msha2699ff0ecee7eep1621e3jsnd39a66924d04',
+    "x-rapidapi-key": 'fee5a13ae9mshb1357a73307c3b0p10276cjsn7bfb52f8c0c0',
   },
 };
 
-const optionsDonosti = {
+const optionsMadrid = {
   method: "GET",
   url: "https://50k-radio-stations.p.rapidapi.com/get/channels",
-  params: { city_id: "3349", country_id: "33", page: "1" },
+  params: { city_id: "447", country_id: "33", page: "1" },
   headers: {
     "x-rapidapi-host": "50k-radio-stations.p.rapidapi.com",
-    "x-rapidapi-key": '7355053848msha2699ff0ecee7eep1621e3jsnd39a66924d04',
+    "x-rapidapi-key": 'fee5a13ae9mshb1357a73307c3b0p10276cjsn7bfb52f8c0c0',
   },
 };
 
@@ -34,7 +34,7 @@ const optionsFdF = {
   params: { city_id: "3885", country_id: "61", page: "1" },
   headers: {
     "x-rapidapi-host": "50k-radio-stations.p.rapidapi.com",
-    "x-rapidapi-key": '7355053848msha2699ff0ecee7eep1621e3jsnd39a66924d04',
+    "x-rapidapi-key": 'fee5a13ae9mshb1357a73307c3b0p10276cjsn7bfb52f8c0c0',
   },
 };
 
@@ -46,8 +46,8 @@ app.get("/city/:cityName", (req, res) => {
   case "wellington":
     options = optionsWellington
     break;
-  case "donosti":
-    options = optionsDonosti
+  case "madrid":
+    options = optionsMadrid
     break;
   case "fortDeFrance":
     options = optionsFdF
@@ -58,7 +58,7 @@ app.get("/city/:cityName", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
-      res.json({ station: response.data.data[0].streams_url[0].url });
+      res.json({ station: response.data.data[1].streams_url[0].url });
     })
     .catch(function (error) {
       console.error(error);
