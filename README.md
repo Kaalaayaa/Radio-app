@@ -13,4 +13,13 @@ Radio Team
 
 ## To dos
 
-- in frontend/src/App.css --> get rid of white margin, that's displayed in the browser
+- FRONTEND: clean up create new components in front end : radio, registration-login, comments and bring them to app.jsx
+
+-  backend: city-router, user-router(login and registration), comments-router
+  folder for Models: userSChema, commentSChema
+  sanitation rules and express-validator
+
+- comments: Maxie
+- registration: Kalaya
+- login: Maria
+  
