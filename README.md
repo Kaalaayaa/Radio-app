@@ -22,4 +22,5 @@ Radio Team
 - comments: Maxie
 - registration: Kalaya
 - login: Maria
-  
+
+- add dotenv with key
