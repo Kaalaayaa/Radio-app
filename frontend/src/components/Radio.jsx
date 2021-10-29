@@ -29,7 +29,6 @@ export default function Radio() {
 
 	return (
 		<div className="Radio">
-			<h1>Select a city to listen to a local radio station</h1>
 			<div className="select">
 				<select
 					onChange={(e) => {

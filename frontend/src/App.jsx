@@ -4,6 +4,8 @@ import Register from "./components/Register.jsx";
 import Radio from "./components/Radio.jsx";
 import DeleteAccount from "./components/DeleteAccount.jsx";
 import Comments from "./components/Comments.jsx";
+import Heading from "./components/Heading.jsx";
+
 
 export default function App() {
   
@@ -12,6 +14,7 @@ export default function App() {
       <Login />
       <Register />
       <DeleteAccount />
+      <Heading /> 
       <Radio />
       <Comments />
     </div>

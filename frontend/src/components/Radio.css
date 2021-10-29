@@ -1,12 +1,3 @@
-h1 {
-	font-size: 2em;
-	width: 70vw;
-	padding-bottom: 20px;
-	position: absolute;
-	top: 25%;
-	text-align: center;
-}
-
 select {
 	-webkit-appearance: none;
 	-moz-appearance: none;

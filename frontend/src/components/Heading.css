@@ -1,0 +1,9 @@
+.heading h1 {
+	font-size: 2em;
+	width: 70vw;
+	position: absolute;
+	top: 50%;
+	text-align: center;
+    padding: 20px;
+    margin-bottom: 10px;
+}
