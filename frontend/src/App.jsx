@@ -6,17 +6,6 @@ import DeleteAccount from "./components/DeleteAccount.jsx";
 import Comments from "./components/Comments.jsx";
 
 export default function App() {
-  const [station, setStation] = useState("");
-  const [city, setCity] = useState("");
-  const url = `http://localhost:9127/city/${city}`;
-  
- 
-
-//   function radioChange(city) {
-    
-//   }
-
-
   
   return (
     <div className="App">
