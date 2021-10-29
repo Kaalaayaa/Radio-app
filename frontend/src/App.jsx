@@ -6,6 +6,7 @@ import DeleteAccount from "./components/DeleteAccount.jsx";
 import Comments from "./components/Comments.jsx";
 
 export default function App() {
+
   
   return (
     <div className="App">
