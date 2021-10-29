@@ -1,11 +1,16 @@
 import "./App.css";
 import { useState } from "react";
 import { useEffect } from "react";
+import dotenv  from "dotenv";
+ 
 
 export default function App() {
   const [station, setStation] = useState("");
   const [city, setCity] = useState("");
-  const url = `http://localhost:9125/city/${city}`;
+
+  dotenv.config();
+  const PORT = process.env.PORT || 9127;
+  const url = `http://localhost:${PORT}/city/${city}`;
   
    
   useEffect(() => {
@@ -43,7 +48,7 @@ export default function App() {
           <option value="">Choose a city</option>
           <option value="wellington">Wellington</option>
           <option value="fortDeFrance">Fort-de France</option>
-          <option value="madrid">Madrid</option>
+          <option value="bilbao">Bilbao</option>
         </select>
       </div>
       {/* <button onClick={handleClick}>Station</button> */}
