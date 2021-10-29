@@ -15,7 +15,7 @@ const optionsWellington = {
   params: { city_id: "360", country_id: "27", page: "1" },
   headers: {
     "x-rapidapi-host": "50k-radio-stations.p.rapidapi.com",
-    "x-rapidapi-key": "fee5a13ae9mshb1357a73307c3b0p10276cjsn7bfb52f8c0c0",
+    "x-rapidapi-key": "b762381f83mshf64abc70ea3eab7p1d8427jsna4b25e74ed77",
   },
 };
 
@@ -25,7 +25,7 @@ const optionsMadrid = {
   params: { city_id: "447", country_id: "33", page: "1" },
   headers: {
     "x-rapidapi-host": "50k-radio-stations.p.rapidapi.com",
-    "x-rapidapi-key": "fee5a13ae9mshb1357a73307c3b0p10276cjsn7bfb52f8c0c0",
+    "x-rapidapi-key": "b762381f83mshf64abc70ea3eab7p1d8427jsna4b25e74ed77",
   },
 };
 
@@ -35,7 +35,7 @@ const optionsFdF = {
   params: { city_id: "3885", country_id: "61", page: "1" },
   headers: {
     "x-rapidapi-host": "50k-radio-stations.p.rapidapi.com",
-    "x-rapidapi-key": "fee5a13ae9mshb1357a73307c3b0p10276cjsn7bfb52f8c0c0",
+    "x-rapidapi-key": "b762381f83mshf64abc70ea3eab7p1d8427jsna4b25e74ed77",
   },
 };
 
@@ -69,18 +69,18 @@ app.post("/register", async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
 
   if (user) {
-    return res.status(400).send("That user already exisits!");
+    return res.status(400).send("That user already exists!");
   } else {
-    try {
-      const user = await User.register(req.body);
-      res.json({
-        _id: user.id,
-        email: user.email,
-      });
-    } catch (error) {
-      console.log(error);
-      res.status(400).json({ error: "Check inputs" });
-    }
+      try {
+        const user = await User.register(req.body);
+        res.json({
+          _id: user.id,
+          email: user.email,
+        });
+      } catch (error) {
+        console.log(error);
+        res.status(400).json({ error: "Check inputs" });
+      }
   }
 });
 

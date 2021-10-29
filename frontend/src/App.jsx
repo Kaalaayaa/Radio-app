@@ -5,7 +5,7 @@ import { useEffect } from "react";
 export default function App() {
   const [station, setStation] = useState("");
   const [city, setCity] = useState("");
-  const url = `http://localhost:9125/city/${city}`;
+  const url = `http://localhost:9127/city/${city}`;
   
    
   useEffect(() => {
