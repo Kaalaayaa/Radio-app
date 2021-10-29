@@ -1,2 +1,7 @@
-GET http://localhost:9125/city/wellington
+POST http://localhost:9127/register
 Content-Type: application/json
+
+{
+    "email": "kalaya.chatelain@yahoo.be",
+    "password": "12345678"
+}
