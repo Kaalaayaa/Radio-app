@@ -103,18 +103,17 @@ app.post("/register", async (req, res) => {
   if (user) {
     return res.status(400).send("That user already exists!");
   } else {
-    try {
-      const user = await User.register(req.body);
-      res.json({
-        _id: user.id,
-        email: user.email,
-      });
-    } catch (error) {
-      console.log(error);
-      res.status(400).json({
-        error: "Check inputs",
-      });
-    }
+      try {
+        const user = await User.register(req.body);
+        res.json({
+          _id: user.id,
+          email: user.email,
+        });
+      } catch (error) {
+        console.log(error);
+        res.status(400).json({ error: "Check inputs" });
+      }
+
   }
 });
 
