@@ -1,14 +1,17 @@
 import "./Radio.css";
 import { useState, useEffect } from "react";
+import dotenv from 'dotenv';
 
 
 export default function Radio() {
+  dotenv.config();
+  const PORT = process.env.PORT || 9127;
+  const url = `http://localhost:${PORT}/city/${city}`;
   const [station, setStation] = useState("");
   const [city, setCity] = useState("");
   
   
   useEffect(() => {
-    const url = `http://localhost:9127/city/${city}`;
     city.length > 1 ? 
       fetch(url)
       .then((response) => response.json())
