@@ -9,33 +9,48 @@ const app = express();
 config(app);
 connect(app);
 
+
+const {X_RAPIDAPI_KEY} = process.env;
+
 const optionsWellington = {
   method: "GET",
   url: "https://50k-radio-stations.p.rapidapi.com/get/channels",
-  params: { city_id: "360", country_id: "27", page: "1" },
+  params: {
+    city_id: "360",
+    country_id: "27",
+    page: "1",
+  },
   headers: {
     "x-rapidapi-host": "50k-radio-stations.p.rapidapi.com",
-    "x-rapidapi-key": "b762381f83mshf64abc70ea3eab7p1d8427jsna4b25e74ed77",
+    "x-rapidapi-key": `${X_RAPIDAPI_KEY}`,
   },
 };
 
-const optionsMadrid = {
+const optionsBilbao = {
   method: "GET",
   url: "https://50k-radio-stations.p.rapidapi.com/get/channels",
-  params: { city_id: "447", country_id: "33", page: "1" },
+  params: {
+    city_id: "447",
+    country_id: "33",
+    page: "1",
+  },
   headers: {
     "x-rapidapi-host": "50k-radio-stations.p.rapidapi.com",
-    "x-rapidapi-key": "b762381f83mshf64abc70ea3eab7p1d8427jsna4b25e74ed77",
+    "x-rapidapi-key": `${X_RAPIDAPI_KEY}`,
   },
 };
 
 const optionsFdF = {
   method: "GET",
   url: "https://50k-radio-stations.p.rapidapi.com/get/channels",
-  params: { city_id: "3885", country_id: "61", page: "1" },
+  params: {
+    city_id: "3885",
+    country_id: "61",
+    page: "1",
+  },
   headers: {
     "x-rapidapi-host": "50k-radio-stations.p.rapidapi.com",
-    "x-rapidapi-key": "b762381f83mshf64abc70ea3eab7p1d8427jsna4b25e74ed77",
+    "x-rapidapi-key": `${X_RAPIDAPI_KEY}`,
   },
 };
 
@@ -46,8 +61,8 @@ app.get("/city/:cityName", (req, res) => {
     case "wellington":
       options = optionsWellington;
       break;
-    case "madrid":
-      options = optionsMadrid;
+    case "bilbao":
+      options = optionsBilbao;
       break;
     case "fortDeFrance":
       options = optionsFdF;
@@ -58,15 +73,32 @@ app.get("/city/:cityName", (req, res) => {
   axios
     .request(options)
     .then(function (response) {
-      res.json({ station: response.data.data[1].streams_url[0].url });
+      res.json(
+        {
+        station: response.data.data[2].streams_url[0].url
+      });
     })
+    // .then(function (response) {
+    //     cityName == "wellington" ?
+    //   res.json(
+    //     {
+    //     station: response.data.data[2].streams_url[0].url
+    //   })
+    //   :
+    //   res.json(
+    //     {
+    //     station: response.data.data[4].streams_url[0].url
+    //   })
+    // })
     .catch(function (error) {
       console.error(error);
     });
 });
 
 app.post("/register", async (req, res) => {
-  let user = await User.findOne({ email: req.body.email });
+  let user = await User.findOne({
+    email: req.body.email,
+  });
 
   if (user) {
     return res.status(400).send("That user already exists!");
@@ -81,6 +113,7 @@ app.post("/register", async (req, res) => {
         console.log(error);
         res.status(400).json({ error: "Check inputs" });
       }
+
   }
 });
 

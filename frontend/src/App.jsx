@@ -1,6 +1,9 @@
 import "./App.css";
-import { useState } from "react";
-import { useEffect } from "react";
+import Login from "./components/Login.jsx";
+import Register from "./components/Register.jsx";
+import Radio from "./components/Radio.jsx";
+import DeleteAccount from "./components/DeleteAccount.jsx";
+import Comments from "./components/Comments.jsx";
 
 export default function App() {
   const [station, setStation] = useState("");
@@ -27,27 +30,15 @@ export default function App() {
     
 //   }
 
+
+  
   return (
     <div className="App">
-      <h1>Select a city to listen to a local radio station</h1>
-      <div className="select">
-        <select
-          onChange={(e) => {
-            setCity(e.target.value);
-            // radioChange(e.target.value);
-          }}
-          value={city}
-          name="format"
-          id="format"
-        >
-          <option value="">Choose a city</option>
-          <option value="wellington">Wellington</option>
-          <option value="fortDeFrance">Fort-de France</option>
-          <option value="madrid">Madrid</option>
-        </select>
-      </div>
-      {/* <button onClick={handleClick}>Station</button> */}
-      <audio src={station} controls autoPlay />
+      <Login />
+      <Register />
+      <DeleteAccount />
+      <Radio />
+      <Comments />
     </div>
   );
 }
