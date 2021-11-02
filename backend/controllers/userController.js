@@ -1,7 +1,7 @@
 import express from 'express';
-import User from "../models/user.js";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+import User from '../models/user.js';
+import jwt from 'jsonwebtoken';
+import compareHashes  from '../libs/crypto.js';
 import { validationResult } from 'express-validator';
 import userValidators from './validators/userValidators.js';
 
@@ -47,12 +47,10 @@ router.post('/login',  userValidators, async (req, res) => {
     });
 
     return;
-}
-
+  }
       // no validation errors? yeahhhh!!
       res.send("super cool! 😃");
-  }
-);
+
 
 
   const user = await User.findOne({
@@ -66,10 +64,7 @@ router.post('/login',  userValidators, async (req, res) => {
       }
   }
 
-  const isPasswordValid = await bcrypt.compare(
-      req.body.password,
-      user.password
-  )
+  const isPasswordValid = await compareHashes(password, user.password);
 
   if (isPasswordValid) {
       const token = jwt.sign({
@@ -91,8 +86,6 @@ router.post('/login',  userValidators, async (req, res) => {
   }
   
 })
-
-
 
 
 
