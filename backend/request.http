@@ -2,6 +2,7 @@ POST http://localhost:9127/register
 Content-Type: application/json
 
 {
-    "email": "kalaya.chatelain@yahoo.be",
-    "password": "12345678"
+    "name": "kalaya",
+    "email": "kalaya.chatelain@gmail.fr",
+    "password": "12345678866"
 }
