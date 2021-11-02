@@ -48,12 +48,14 @@ export default function Login() {
             type="email" 
             placeholder="Email" 
             onChange={e => setEmail(e.target.value)}
-            {...register("Email", {
+            {...register("email", {
               required: true,
               min: 3,
               pattern: /^\S+@\S+$/i,
             })}
             />
+          <p>{errors.email?.message}</p>
+
      
       <input
         className="inputPassword"
@@ -63,12 +65,14 @@ export default function Login() {
         // minLength={3}
         // maxLength={28}
         // pattern= {/^\S+@\S+$/i}
-        {...register("Password", {
+        {...register("password", {
           required: true,
           min: 3,
           pattern: /^\S+\S+$/i,
         })}
       />
+      <p>{errors.password?.message}</p>
+
 
       {/* <button type="submit" onClick= {() => props.login(email, password)}>Login</button> */}
       <input type="submit" onClick={loginUser} />
