@@ -1,8 +1,9 @@
 import express from "express";
 import connect from "./libs/database.js";
 import config from "./libs/config.js";
-import axios from "axios";
+import cityController from "./controllers/cityController.js";
 import userController from "./controllers/userController.js";
+import errorController from "./controllers/errorController.js";
 
 
 // Setup / Configure Express
@@ -10,97 +11,14 @@ const app = express();
 config(app);
 connect(app);
 
+// for changing radio station based on city
+app.use("/city", cityController);
 
-const {X_RAPIDAPI_KEY} = process.env;
-
-const optionsWellington = {
-  method: "GET",
-  url: "https://50k-radio-stations.p.rapidapi.com/get/channels",
-  params: {
-    city_id: "360",
-    country_id: "27",
-    page: "1",
-  },
-  headers: {
-    "x-rapidapi-host": "50k-radio-stations.p.rapidapi.com",
-    "x-rapidapi-key": `${X_RAPIDAPI_KEY}`,
-  },
-};
-
-const optionsBilbao = {
-  method: "GET",
-  url: "https://50k-radio-stations.p.rapidapi.com/get/channels",
-  params: {
-    city_id: "447",
-    country_id: "33",
-    page: "1",
-  },
-  headers: {
-    "x-rapidapi-host": "50k-radio-stations.p.rapidapi.com",
-    "x-rapidapi-key": `${X_RAPIDAPI_KEY}`,
-  },
-};
-
-const optionsFdF = {
-  method: "GET",
-  url: "https://50k-radio-stations.p.rapidapi.com/get/channels",
-  params: {
-    city_id: "3885",
-    country_id: "61",
-    page: "1",
-  },
-  headers: {
-    "x-rapidapi-host": "50k-radio-stations.p.rapidapi.com",
-    "x-rapidapi-key": `${X_RAPIDAPI_KEY}`,
-  },
-};
-
-app.get("/city/:cityName", (req, res) => {
-  const cityName = req.params.cityName;
-  let options;
-  switch (cityName) {
-    case "wellington":
-      options = optionsWellington;
-      break;
-    case "bilbao":
-      options = optionsBilbao;
-      break;
-    case "fortDeFrance":
-      options = optionsFdF;
-      break;
-    default:
-  }
-
-  axios
-    .request(options)
-    .then(function (response) {
-      res.json(
-        {
-        station: response.data.data[2].streams_url[0].url
-      });
-    })
-    // .then(function (response) {
-    //     cityName == "wellington" ?
-    //   res.json(
-    //     {
-    //     station: response.data.data[2].streams_url[0].url
-    //   })
-    //   :
-    //   res.json(
-    //     {
-    //     station: response.data.data[4].streams_url[0].url
-    //   })
-    // })
-    .catch(function (error) {
-      console.error(error);
-    });
-});
-
-
-
-
-
+// for registration, login and adding comments (only logged in users can see comments and add comments)
 app.use("/", userController);
+
+// Global error handler
+app.use(errorController);
 
 
 const PORT = process.env.PORT || 9127;
