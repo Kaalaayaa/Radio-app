@@ -1,9 +1,9 @@
 import express from 'express';
 import User from '../models/user.js';
 import jwt from 'jsonwebtoken';
-import compareHashes  from '../libs/crypto.js';
+import { compareHashes }  from '../libs/crypto.js';
 import { validationResult } from 'express-validator';
-import userValidators from './validators/userValidators.js';
+import userValidators from "../validation/useValidators.js";
 
 
 
@@ -12,7 +12,8 @@ const router = express.Router();
 const secret = process.env.SECRET;
 
 
-router.post("/register", async (req, res) => {
+router.post("/register", userValidators, async (req, res) => {
+
   let user = await User.findOne({
     email: req.body.email,
   });
