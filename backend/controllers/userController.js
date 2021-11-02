@@ -8,6 +8,7 @@ import validate from '../middlewares/checkValidation.js';
 import userValidators from '../validation/userValidators.js';
 
 
+
 const router = express.Router();
 dotenv.config();
 
