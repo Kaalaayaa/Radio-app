@@ -17,6 +17,7 @@
     font-weight: 300;
 }
 
+.loginForm input[type="text"],
 .loginForm input[type="email"],
 .loginForm input[type="password"] {
     border: 0;
@@ -33,6 +34,7 @@
     transition: 0.25s;
 }
 
+.loginForm input[type="text"]:focus,
 .loginForm input[type="email"]:focus,
 .loginForm input[type="password"]:focus {
     width: 280px;
