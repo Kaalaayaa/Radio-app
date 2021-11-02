@@ -2,7 +2,7 @@ import express from "express";
 import connect from "./libs/database.js";
 import config from "./libs/config.js";
 import axios from "axios";
-import User from "./models/user.js";
+import userController from "./controllers/userController.js"
 
 // Setup / Configure Express
 const app = express();
@@ -95,28 +95,25 @@ app.get("/city/:cityName", (req, res) => {
     });
 });
 
-app.post("/login", (req, res) => {
-  // TODO: Check login username / password somehow
-  const { email, password } = req.body;
+// app.post("/login", (req, res) => {
+//   // TODO: Check login username / password somehow
+//   const { email, password } = req.body;
 
-  const user = users.find((u) => u.email === email);
+//   const user = users.find((u) => u.email === email);
 
-  if (!user) {
-    return res.sendStatus(401);
-  }
+//   if (!user) {
+//     return res.sendStatus(401);
+//   }
 
-  if (!checkHash(password, user.password)) {
-    return res.sendStatus(401);
-  }
+//   if (!checkHash(password, user.password)) {
+//     return res.sendStatus(401);
+//   }
 
   
-});
+// });
 
 
-app.post("/register", async (req, res) => {
-  let user = await User.findOne({
-    email: req.body.email,
-  });
+app.use("/", userController);
 
 
 const PORT = process.env.PORT || 9127;
