@@ -2,7 +2,9 @@ import express from 'express';
 import User from "../models/user.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { hash, compareHashes } from '../libs/crypto.js';
+import { validationResult } from 'express-validator';
+import userValidators from './validators/userValidators.js';
+
 
 
 const router = express.Router();
@@ -33,7 +35,26 @@ router.post("/register", async (req, res) => {
 });
 
 
-router.post('/login', async (req, res) => {
+router.post('/login',  userValidators, async (req, res) => {
+  const result = validationResult(req);
+
+  if (!result.isEmpty()) {
+
+    res.status(400);
+  
+    res.json({
+        errors: result.errors.map(e => e.msg)
+    });
+
+    return;
+}
+
+      // no validation errors? yeahhhh!!
+      res.send("super cool! 😃");
+  }
+);
+
+
   const user = await User.findOne({
       email: req.body.email,
   })
@@ -68,6 +89,7 @@ router.post('/login', async (req, res) => {
           user: false
       })
   }
+  
 })
 
 

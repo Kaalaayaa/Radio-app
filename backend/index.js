@@ -3,8 +3,7 @@ import connect from "./libs/database.js";
 import config from "./libs/config.js";
 import axios from "axios";
 import userController from "./controllers/userController.js";
-import { validationResult } from 'express-validator';
-import userValidators from './validators/userValidators.js';
+
 
 // Setup / Configure Express
 const app = express();
@@ -97,28 +96,7 @@ app.get("/city/:cityName", (req, res) => {
     });
 });
 
-app.post(
-  '/users',
-  userValidators,
-  (req, res) => {
-      console.log(req.body);
 
-      const result = validationResult(req);
-      if (!result.isEmpty()) {
-
-          res.status(400);
-        
-          res.json({
-              errors: result.errors.map(e => e.msg)
-          });
-
-          return;
-      }
-
-      // no validation errors? yeahhhh!!
-      res.send("cuper cool! 😃");
-  }
-);
 
 
 
