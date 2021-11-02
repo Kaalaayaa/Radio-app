@@ -2,7 +2,9 @@ import express from "express";
 import connect from "./libs/database.js";
 import config from "./libs/config.js";
 import axios from "axios";
-import userController from "./controllers/userController.js"
+import userController from "./controllers/userController.js";
+import { validationResult } from 'express-validator';
+import userValidators from './validators/userValidators.js';
 
 // Setup / Configure Express
 const app = express();
@@ -95,22 +97,29 @@ app.get("/city/:cityName", (req, res) => {
     });
 });
 
-// app.post("/login", (req, res) => {
-//   // TODO: Check login username / password somehow
-//   const { email, password } = req.body;
+app.post(
+  '/users',
+  userValidators,
+  (req, res) => {
+      console.log(req.body);
 
-//   const user = users.find((u) => u.email === email);
+      const result = validationResult(req);
+      if (!result.isEmpty()) {
 
-//   if (!user) {
-//     return res.sendStatus(401);
-//   }
+          res.status(400);
+        
+          res.json({
+              errors: result.errors.map(e => e.msg)
+          });
 
-//   if (!checkHash(password, user.password)) {
-//     return res.sendStatus(401);
-//   }
+          return;
+      }
 
-  
-// });
+      // no validation errors? yeahhhh!!
+      res.send("cuper cool! 😃");
+  }
+);
+
 
 
 app.use("/", userController);
