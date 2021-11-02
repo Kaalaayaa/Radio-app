@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import dotenv from 'dotenv';
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import "./Login.css";
@@ -19,8 +20,8 @@ export default function Login() {
     
     const loginUser = () => {
     console.log("User is logged in");
-    const PORT = process.env.PORT || 9127;
     dotenv.config();
+    const PORT = process.env.PORT || 9127;
     const url = `http://localhost:${PORT}/login`;
     const data= { email, password };
     const headers= { "Content-Type": "application/json" };
@@ -46,7 +47,6 @@ export default function Login() {
             className="inputEmail" 
             type="email" 
             placeholder="Email" 
-            value={email} 
             onChange={e => setEmail(e.target.value)}
             {...register("Email", {
               required: true,
@@ -59,11 +59,14 @@ export default function Login() {
         className="inputPassword"
         type="password"
         placeholder="Password"
-        value={password} 
+        // required={true}
+        // minLength={3}
+        // maxLength={28}
+        // pattern= {/^\S+@\S+$/i}
         {...register("Password", {
           required: true,
           min: 3,
-          pattern: /^\S+@\S+$/i,
+          pattern: /^\S+\S+$/i,
         })}
       />
 
