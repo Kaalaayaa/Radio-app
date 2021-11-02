@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import seed from './seed.js';
 
 // // Load environment variables
 // const { error } = dotenv.config();
@@ -13,7 +14,7 @@ import cors from 'cors';
 //     console.error("Missing environment variable; check .env values");
 // }
 
-export default function config(app) {
+export default async function config(app) {
     // Log all requests
     app.use((req,res,next) => {
         console.log(`[Request] ${req.method} ${req.path}`);
@@ -22,5 +23,8 @@ export default function config(app) {
 
     app.use(cors());
     app.use(express.json());
-    dotenv.config()
+    dotenv.config();
+
+    await seed();
+    console.log("seeding fake comments");
 }
