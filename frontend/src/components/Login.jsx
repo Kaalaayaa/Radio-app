@@ -3,12 +3,15 @@ import axios from 'axios';
 import dotenv from 'dotenv';
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import Register from "./Register.jsx";
 import "./Login.css";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loginStatus, setLoginStatus] = useState(false);
+    
+
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => console.log(data);
@@ -17,6 +20,7 @@ export default function Login() {
     const showRegistration = () => {
       setLoginStatus(!loginStatus)
     }
+    
     
     const loginUser = () => {
     console.log("User is logged in");
@@ -37,7 +41,10 @@ export default function Login() {
           }     
         });
       }     
-             
+      if(loginStatus) {
+        return ( 
+          < Register />)
+    }         
       
   return (
     <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
@@ -61,10 +68,7 @@ export default function Login() {
         className="inputPassword"
         type="password"
         placeholder="Password"
-        // required={true}
-        // minLength={3}
-        // maxLength={28}
-        // pattern= {/^\S+@\S+$/i}
+        onChange={(e) => setPassword(e.target.value)}
         {...register("password", {
           required: true,
           min: 3,
