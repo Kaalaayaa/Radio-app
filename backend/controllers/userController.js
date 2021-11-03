@@ -5,8 +5,9 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { compareHashes } from '../libs/crypto.js';
 import validate from '../middlewares/checkValidation.js';
-import userValidators from '../validation/userValidators.js';
-
+import loginRules from '../validation/loginRules.js';
+import registerRules from '../validation/registerRules.js';
+import commentRules from '../validation/commentRules.js';
 
 
 const router = express.Router();
@@ -15,7 +16,7 @@ dotenv.config();
 const secret = process.env.SECRET;
 
 router.post("/register", 
-// validate(userValidators), same error as with register?
+validate(registerRules), 
 async (req, res) => {
 	try {
 		let userCheck = await User.findOne({
@@ -28,6 +29,7 @@ async (req, res) => {
 		const user = await User.register(req.body);
 		res.json({
 			_id: user.id,
+			name: user.name,
 			email: user.email,
 		});
 	} catch (error) {
@@ -37,19 +39,13 @@ async (req, res) => {
 });
 
 router.post('/login', 
-// validate(userValidators), // getting error here: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+validate(loginRules), 
 async (req, res) => {
 	try {
 		const user = await User.findOne({
       email: req.body.email,
   	})
-
 		if (!user) {
-				// return { // comment from maxie: does this need to be a res.json() or where is this returned object going to ?
-				// 		status: 'error',
-				// 		error: 'Invalid login'
-				// }
-				// like this: 
 				return res.json({ 
 					status: 'error',
 					error: 'Invalid login'
@@ -57,7 +53,7 @@ async (req, res) => {
 		}
 
 		const isPasswordValid = await compareHashes(req.body.password, user.password);
-
+		
 		if (isPasswordValid) {
 			const token = jwt.sign({
 						name: user.name,
@@ -68,29 +64,17 @@ async (req, res) => {
 			
 			// load comments together with successful login
 			const allComments = await Comment.find();
-			// res.json(allComments);
 
-			return res.json({ // Comment from maxie: the return needs to go, if you have a else, no?
+			return res.json({ 
 				status: 'ok',
 				userToken: token,
 				comments: allComments
 			})
-			// like this: 
-			// res.json({ 
-			// 	status: 'ok',
-			// 	userToken: token,
-			// 	comments: allComments
-			// })
 		} else {
-			return res.json({ // same here
+			return res.json({ 
 				status: 'error',
 				user: false
 			})
-			// like this:
-			// res.json({ 
-			// 	status: 'error',
-			// 	user: false
-			// })
 		}
 	} catch (error) {
 		console.log(error);
@@ -117,26 +101,28 @@ async (req, res) => {
 
 router.post("/:user/commenting", 
 // checkLogin, 
-// validate(userValidators), // can't use them 
+validate(commentRules), 
 async (req, res) => {
     // console.log(req.body);
     try {
-        const userMatch = await User.findOne({ _id: req.params.user});
-        if (!userMatch) {
-            return res.status(400).json({ success: false });
-        }
-        const newComment = await Comment.create({
-            user: userMatch._id,
-            // user: userMatch.name, // TODO? not sure how to get the username displayed (needs to be wrangled in frontend?)
-            title: req.body.title,
-            content: req.body.content
-        })
-        userMatch.comments.push(newComment);
-        res.json(newComment);
+			const userMatch = await User.findOne({ _id: req.params.user});
+			if (!userMatch) {
+					return res.status(400).json({ success: false });
+			}
+
+			const newComment = await Comment.create({
+					user: userMatch._id,
+					// user: userMatch.name, // TODO? not sure how to get the username displayed (needs to be wrangled in frontend?)
+					title: req.body.title,
+					content: req.body.content
+			})
+			userMatch.comments.push(newComment);
+			res.json(newComment);
+
     } catch (error) {
-        res.status(400).json({ error: error.message });
-        console.log(error);
-        return;
+			res.status(400).json({ error: error.message });
+			console.log(error);
+			return;
     }
 
 });
