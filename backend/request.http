@@ -13,7 +13,7 @@ POST http://localhost:9127/login
 Content-Type: application/json
 
 {
-    "email": "k.chate@gmail.fr",
+    "email": "ka.championette@gmail.fr",
     "password": "!12343hdkdem,fju567+8866"
 }
 

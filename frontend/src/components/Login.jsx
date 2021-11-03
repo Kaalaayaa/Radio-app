@@ -6,7 +6,7 @@ import { useState } from "react";
 import Register from "./Register.jsx";
 import "./Login.css";
 
-export default function Login() {
+export default function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loginStatus, setLoginStatus] = useState(false);
@@ -32,16 +32,18 @@ export default function Login() {
 
     axios.post(url, data, headers)
        .then((response) => {
-         if (response.data.message) {
-           setLoginStatus(response.data.message);
+         if (response.data.error) {
+           setLoginStatus(response.data.status);
           } else {
 
-            setLoginStatus(response.data[0].name);
+            // setLoginStatus(response.data.name);
+            props.setUser(response.data)
         
           }     
         });
-      }     
-      if(loginStatus) {
+      } 
+          
+      if(loginStatus && loginStatus !== "error") {
         return ( 
           < Register />)
     }         
@@ -49,17 +51,18 @@ export default function Login() {
   return (
     <form className="loginForm" onSubmit={handleSubmit(onSubmit)}>
       <h2>Login</h2>
-
+      {loginStatus === "error" && <p>Error!</p>}
       <input 
             className="inputEmail" 
             type="email" 
-            placeholder="Email" 
+            placeholder="Email"
+            value={email}
             onChange={e => setEmail(e.target.value)}
-            {...register("email", {
-              required: true,
-              min: 3,
-              pattern: /^\S+@\S+$/i,
-            })}
+            // {...register("email", {
+            //   required: true,
+            //   min: 3,
+            //   pattern: /^\S+@\S+$/i,
+            // })}
             />
           <p>{errors.email?.message}</p>
 
@@ -68,12 +71,13 @@ export default function Login() {
         className="inputPassword"
         type="password"
         placeholder="Password"
+        value={password}
         onChange={(e) => setPassword(e.target.value)}
-        {...register("password", {
-          required: true,
-          min: 3,
-          pattern: /^\S+\S+$/i,
-        })}
+        // {...register("password", {
+        //   required: true,
+        //   min: 3,
+        //   pattern: /^\S+\S+$/i,
+        // })}
       />
       <p>{errors.password?.message}</p>
 
