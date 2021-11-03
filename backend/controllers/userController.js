@@ -45,15 +45,15 @@ async (req, res) => {
   	})
 
 		if (!user) {
-				return { // comment from maxie: does this need to be a res.json() or where is this returned object going to ?
-						status: 'error',
-						error: 'Invalid login'
-				}
+				// return { // comment from maxie: does this need to be a res.json() or where is this returned object going to ?
+				// 		status: 'error',
+				// 		error: 'Invalid login'
+				// }
 				// like this: 
-				// return res.json({ 
-				// 	status: 'error',
-				// 	error: 'Invalid login'
-				// })
+				return res.json({ 
+					status: 'error',
+					error: 'Invalid login'
+				})
 		}
 
 		const isPasswordValid = await compareHashes(req.body.password, user.password);

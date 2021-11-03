@@ -5,7 +5,7 @@ import "./Login.css";
 import axios from "axios"
 import Login from "./Login.jsx";
 
-export default function Register()  {
+export default function Register(props)  {
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
@@ -36,7 +36,7 @@ export default function Register()  {
   
   if(isLogin) {
       return ( 
-        < Login />)
+        < Login setUser={props.setUser}/>)
   }
 
   return (
@@ -51,7 +51,6 @@ export default function Register()  {
         required={true}
         minLength={3}
         maxLength={28}
-        pattern= {/^\S+@\S+$/i}
       />
       <p>{errors.name?.message}</p>
 
@@ -64,7 +63,7 @@ export default function Register()  {
         required={true}
         minLength={3}
         maxLength={28}
-        pattern= {/^\S+@\S+$/i}
+        // pattern= {/^\S+@\S+$/i}
       />
       <p>{errors.email?.message}</p>
 
@@ -77,7 +76,7 @@ export default function Register()  {
         required={true}
         minLength={3}
         maxLength={28}
-        pattern= {/^\S+@\S+$/i}
+        // pattern= {/^\S+@\S+$/i}
       />
       <p>{errors.password?.message}</p>
 

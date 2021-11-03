@@ -17,7 +17,7 @@ export default function App() {
     <div className="App">
       <CommentsContextProvider>
       {/* <Login /> */}
-         <Register />
+         <Register setUser={setUser}/>
          <DeleteAccount />
          <Heading /> 
          <Radio />
