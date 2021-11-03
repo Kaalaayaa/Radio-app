@@ -47,23 +47,40 @@ export default function Register()  {
         type="text" 
         placeholder="Name"
         onChange={e => setName(e.target.value)}
-        {...register("Name", {required: true, min: 3, pattern: /^\S+@\S+$/i})}
+        value={name}
+        required={true}
+        minLength={3}
+        maxLength={28}
+        pattern= {/^\S+@\S+$/i}
       />
+      <p>{errors.name?.message}</p>
+
       <input 
         className="inputEmail" 
         type="email" 
         placeholder="Email"
         onChange={(e) => setEmail(e.target.value)}
-        {...register("Email", {required: true, min: 3, pattern: /^\S+@\S+$/i})}
+        value={email}
+        required={true}
+        minLength={3}
+        maxLength={28}
+        pattern= {/^\S+@\S+$/i}
       />
+      <p>{errors.email?.message}</p>
+
       <input 
         className="inputPassword" 
         type="password" 
         placeholder="Password" 
         onChange={(e) => setPassword(e.target.value)}
-        {...register("Password", {required: true, min: 3, pattern: /^\S+@\S+$/i})}
+        value={password}
+        required={true}
+        minLength={3}
+        maxLength={28}
+        pattern= {/^\S+@\S+$/i}
       />
-     
+      <p>{errors.password?.message}</p>
+
       <input type="submit" onClick={registerUser} />
       <p onClick={showLogin}>Already a member? Log In!</p>
     </form>

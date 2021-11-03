@@ -3,6 +3,26 @@ Content-Type: application/json
 
 {
     "name": "kalaya",
-    "email": "kalaya.chatelain@gmail.fr",
-    "password": "12345678866"
+    "email": "ka.championette@gmail.fr",
+    "password": "!12343hdkdem,fju567+8866"
+}
+
+###
+
+POST http://localhost:9127/login
+Content-Type: application/json
+
+{
+    "email": "k.chate@gmail.fr",
+    "password": "!12343hdkdem,fju567+8866"
+}
+
+###
+
+POST http://localhost:9127/61815fb6df67e30a757c8d00/commenting
+Content-Type: application/json
+
+{
+    "title": "this is an actual test",
+    "content": "let's see if it works..."
 }
