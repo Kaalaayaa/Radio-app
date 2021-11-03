@@ -42,10 +42,9 @@ export default function Radio() {
 					<option value="">Choose a city</option>
 					<option value="wellington">Wellington</option>
 					<option value="fortDeFrance">Fort-de France</option>
-					<option value="madrid">Madrid</option>
+					<option value="bilbao">Bilbao</option>
 				</select>
 			</div>
-			{/* <button onClick={handleClick}>Station</button> */}
 			<audio src={station} controls autoPlay />
 		</div>
 	);

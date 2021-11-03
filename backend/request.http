@@ -2,9 +2,9 @@ POST http://localhost:9127/register
 Content-Type: application/json
 
 {
-    "name": "kalaya",
-    "email": "ka.championette@gmail.fr",
-    "password": "!12343hdkdem,fju567+8866"
+    "name": "    <script>maxie_h",
+    "email": "maxie.jztutl@gmail.fr",
+    "password": "!12343hdkFBHdem,fju56G7+8866"
 }
 
 ###
@@ -13,16 +13,16 @@ POST http://localhost:9127/login
 Content-Type: application/json
 
 {
-    "email": "ka.championette@gmail.fr",
-    "password": "!12343hdkdem,fju567+8866"
+    "email": "maxie.h@gmail.fr",
+    "password": "!12343hdkFBHdem,fju56G7+8866"
 }
 
 ###
 
-POST http://localhost:9127/61815fb6df67e30a757c8d00/commenting
+POST http://localhost:9127/618269aef8438a896bb5e525/commenting
 Content-Type: application/json
 
 {
     "title": "this is an actual test",
-    "content": "let's see if it works..."
+    "content": "let´s see if it works..."
 }
