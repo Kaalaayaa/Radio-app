@@ -46,13 +46,12 @@ export default function Register()  {
         className="inputName"
         type="text" 
         placeholder="Name"
-        value={name}
         onChange={e => setName(e.target.value)}
+        value={name}
         required={true}
         minLength={3}
         maxLength={28}
         pattern= {/^\S+@\S+$/i}
-        // {...register("name", {required: true, min: 3, pattern: /^\S+@\S+$/i})}
       />
       <p>{errors.name?.message}</p>
 
@@ -60,13 +59,12 @@ export default function Register()  {
         className="inputEmail" 
         type="email" 
         placeholder="Email"
-        value={email}
         onChange={(e) => setEmail(e.target.value)}
+        value={email}
         required={true}
         minLength={3}
         maxLength={28}
         pattern= {/^\S+@\S+$/i}
-        // {...register("email", {required: true, min: 3, pattern: /^\S+@\S+$/i})}
       />
       <p>{errors.email?.message}</p>
 
@@ -74,13 +72,12 @@ export default function Register()  {
         className="inputPassword" 
         type="password" 
         placeholder="Password" 
-        value={password}
         onChange={(e) => setPassword(e.target.value)}
-         required={true}
+        value={password}
+        required={true}
         minLength={3}
         maxLength={28}
         pattern= {/^\S+@\S+$/i}
-        // {...register("password", {required: true, min: 3, pattern: /^\S+@\S+$/i})}
       />
       <p>{errors.password?.message}</p>
 

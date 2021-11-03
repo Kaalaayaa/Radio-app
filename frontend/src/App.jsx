@@ -5,6 +5,7 @@ import Radio from "./components/Radio.jsx";
 import DeleteAccount from "./components/DeleteAccount.jsx";
 import Comments from "./components/Comments.jsx";
 import Heading from "./components/Heading.jsx";
+import { CommentsContextProvider } from "./contexts/CommentsContext.jsx";
 
 import "./App.css";
 
@@ -14,11 +15,15 @@ export default function App() {
   
   return (
     <div className="App">
-      <Register />
-      <DeleteAccount />
-      <Heading /> 
-      <Radio />
-      {user ?  <Comments /> : null}
+      <CommentsContextProvider>
+      {/* <Login /> */}
+         <Register />
+         <DeleteAccount />
+         <Heading /> 
+         <Radio />
+         {user ?  <Comments /> : null}
+      </CommentsContextProvider>
+      
     </div>
   );
 }

@@ -1,0 +1,82 @@
+.commentsWrapper {
+    width: 50%;
+    font-size: 16px;
+    margin-top: 225px;
+
+}
+
+.createComment {
+    font-family: 'Josefin Sans', sans-serif;
+    width: 100%;
+    font-size: 16px;
+    height: 40px;
+    outline: none;
+    padding-left: 10px;
+    border: none;
+    padding: none;
+    background-color: rgba(255, 255, 255, 0.13);
+
+
+}
+
+ul {
+    color: hsl(235, 19%, 35%);
+    padding: 0;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 10px 40px 0px;
+    
+}
+
+li {
+    padding: 10px;
+    list-style: none;
+    border-bottom: 1px solid cadetblue;
+}
+
+.comment {
+    padding-top: 40px;
+    height: 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-top: 1px solid cadetblue;
+    
+}
+
+.comment-name {
+    margin-bottom: 10px;
+    color: black;
+    font-weight: bold;
+}
+
+.comment-text {
+    margin-bottom: 10px;
+}
+
+.reactions {
+    display:flex;
+    width: 130px;
+    justify-content: space-between;
+}
+.reactions p {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
