@@ -35,10 +35,8 @@ export default function Login(props) {
          if (response.data.error) {
            setLoginStatus(response.data.status);
           } else {
-
             // setLoginStatus(response.data.name);
             props.setUser(response.data)
-        
           }     
         });
       } 

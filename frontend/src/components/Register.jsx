@@ -24,7 +24,7 @@ export default function Register(props)  {
   }
 
   const registerUser = () => {
-      console.log("New cs added")
+      
       axios.post("http://localhost:9127/register", {
           name: name,
           email: email,
